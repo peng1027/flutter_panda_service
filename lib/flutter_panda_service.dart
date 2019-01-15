@@ -1,7 +1,7 @@
 library flutter_panda_service;
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
+bool debugModel = false;
+
+void enableDebug() {
+  debugModel = true;
 }

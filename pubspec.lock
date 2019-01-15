@@ -34,6 +34,15 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_panda_foundation:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: develop
+      resolved-ref: caa4519e27ec15d965b87899d0465f0490ea0439
+      url: "git@github.com:derrick-zhu/FlutterPandaFoundation.git"
+    source: git
+    version: "0.0.1"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -67,6 +76,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.0.1"
+  shared_preferences:
+    dependency: transitive
+    description:
+      name: shared_preferences
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.4.3"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -79,6 +95,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.4.1"
+  sprintf:
+    dependency: "direct main"
+    description:
+      name: sprintf
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "4.0.0"
   stack_trace:
     dependency: transitive
     description:
@@ -130,3 +153,4 @@ packages:
     version: "2.0.8"
 sdks:
   dart: ">=2.1.0 <3.0.0"
+  flutter: ">=0.1.4 <2.0.0"

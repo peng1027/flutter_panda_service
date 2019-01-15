@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/flutter_panda_service.iml" filepath="$PROJECT_DIR$/flutter_panda_service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FlutterPandaService.iml" filepath="$PROJECT_DIR$/FlutterPandaService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android/app/src/main/main.iml" filepath="$PROJECT_DIR$/android/app/src/main/main.iml" />
     </modules>
   </component>
 </project>

@@ -10,6 +10,14 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  sprintf: ^4.0.0   # sprintf function
+
+  # farfetch packages
+
+  flutter_panda_foundation:
+    git:
+      url: git@github.com:derrick-zhu/FlutterPandaFoundation.git
+      ref: develop
 
 dev_dependencies:
   flutter_test:

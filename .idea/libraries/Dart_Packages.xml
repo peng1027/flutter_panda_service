@@ -37,6 +37,13 @@
             </list>
           </value>
         </entry>
+        <entry key="flutter_panda_foundation">
+          <value>
+            <list>
+              <option value="$USER_HOME$/flutter/.pub-cache/git/FlutterPandaFoundation-caa4519e27ec15d965b87899d0465f0490ea0439/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="flutter_test">
           <value>
             <list>
@@ -72,6 +79,13 @@
             </list>
           </value>
         </entry>
+        <entry key="shared_preferences">
+          <value>
+            <list>
+              <option value="$USER_HOME$/flutter/.pub-cache/hosted/pub.flutter-io.cn/shared_preferences-0.4.3/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="sky_engine">
           <value>
             <list>
@@ -83,6 +97,13 @@
           <value>
             <list>
               <option value="$USER_HOME$/flutter/.pub-cache/hosted/pub.flutter-io.cn/source_span-1.4.1/lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="sprintf">
+          <value>
+            <list>
+              <option value="$USER_HOME$/flutter/.pub-cache/hosted/pub.flutter-io.cn/sprintf-4.0.0/lib" />
             </list>
           </value>
         </entry>
@@ -138,6 +159,7 @@
       </option>
     </properties>
     <CLASSES>
+      <root url="file://$USER_HOME$/flutter/.pub-cache/git/FlutterPandaFoundation-caa4519e27ec15d965b87899d0465f0490ea0439/lib" />
       <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.flutter-io.cn/async-2.0.8/lib" />
       <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.flutter-io.cn/boolean_selector-1.0.4/lib" />
       <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.flutter-io.cn/charcode-1.1.2/lib" />
@@ -146,7 +168,9 @@
       <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.flutter-io.cn/meta-1.1.6/lib" />
       <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.flutter-io.cn/path-1.6.2/lib" />
       <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.flutter-io.cn/quiver-2.0.1/lib" />
+      <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.flutter-io.cn/shared_preferences-0.4.3/lib" />
       <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.flutter-io.cn/source_span-1.4.1/lib" />
+      <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.flutter-io.cn/sprintf-4.0.0/lib" />
       <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.flutter-io.cn/stack_trace-1.9.3/lib" />
       <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.flutter-io.cn/stream_channel-1.6.8/lib" />
       <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.flutter-io.cn/string_scanner-1.0.4/lib" />
