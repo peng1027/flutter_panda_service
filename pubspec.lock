@@ -39,8 +39,8 @@ packages:
     description:
       path: "."
       ref: develop
-      resolved-ref: caa4519e27ec15d965b87899d0465f0490ea0439
-      url: "git@github.com:derrick-zhu/FlutterPandaFoundation.git"
+      resolved-ref: "4fce9e9d107e4dd78f5dc2a13cb4d95a03455f65"
+      url: "git@github.com:derrick-zhu/flutter_panda_foundation.git"
     source: git
     version: "0.0.1"
   flutter_test:
