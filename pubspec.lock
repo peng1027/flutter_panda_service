@@ -49,7 +49,7 @@ packages:
       name: build_daemon
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.2.0"
+    version: "0.2.2"
   build_resolvers:
     dependency: transitive
     description:
@@ -63,7 +63,7 @@ packages:
       name: build_runner
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.2.1"
+    version: "1.2.3"
   build_runner_core:
     dependency: transitive
     description:
@@ -154,11 +154,9 @@ packages:
   flutter_panda_foundation:
     dependency: "direct main"
     description:
-      path: "."
-      ref: develop
-      resolved-ref: "4fce9e9d107e4dd78f5dc2a13cb4d95a03455f65"
-      url: "https://github.com/derrick-zhu/flutter_panda_foundation.git"
-    source: git
+      path: "../flutter_panda_foundation"
+      relative: true
+    source: path
     version: "0.0.1"
   flutter_test:
     dependency: "direct dev"

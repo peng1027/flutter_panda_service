@@ -1,61 +1,71 @@
+/*
+ * endpoints.dart
+ * flutter_panda_service
+ *
+ * Developed by zhudelun on 1/29/19 1:54 AM
+ * Copyright (c) 2019. Farfetch. All rights reserved.
+ *
+ */
+
 import 'dart:core';
 
-import 'package:flutter/foundation.dart';
+import 'package:flutter_panda_foundation/flutter_panda_foundation.dart';
 import 'package:sprintf/sprintf.dart';
 
 import '../flutter_panda_service.dart' as globals;
 
-enum enumApiType {
-  eCommerce,
-  content,
-  payment,
-  almirCMS,
-  marketing,
-  abTesting,
-  authentication,
-  channelService,
+class ApiType extends EnumType<int, String> {
+  ApiType(int type, String rawValue) : super(typeValue: type, rawValue: rawValue);
+
+  static const int eCommerce = 0;
+  static const int content = eCommerce + 1;
+  static const int payment = content + 1;
+  static const int almirCMS = payment + 1;
+  static const int marketing = almirCMS + 1;
+  static const int abTesting = marketing + 1;
+  static const int authentication = abTesting + 1;
+  static const int channelService = authentication + 1;
+
+  factory ApiType.getECommerce() => ApiType(ApiType.eCommerce, "eCommerce");
+  factory ApiType.getContent() => ApiType(ApiType.content, "content");
+  factory ApiType.getPayment() => ApiType(ApiType.payment, "payment");
+  factory ApiType.getAlmirCMS() => ApiType(ApiType.almirCMS, "almirCMS");
+  factory ApiType.getMarketing() => ApiType(ApiType.marketing, "marketing");
+  factory ApiType.getAbTesting() => ApiType(ApiType.abTesting, "abTesting");
+  factory ApiType.getAuthentication() => ApiType(ApiType.authentication, "authentication");
+  factory ApiType.getChannelService() => ApiType(ApiType.channelService, "channelService");
 }
 
-class ApiType {
-  static const String eCommerce = "eCommerce";
-  static const String content = "content";
-  static const String payment = "payment";
-  static const String almirCMS = "almirCMS";
-  static const String marketing = "marketing";
-  static const String abTesting = "abTesting";
-  static const String authentication = "authentication";
-  static const String channelService = "channelService";
+class Domain extends EnumType<int, String> {
+  static const int global = 0;
+  static const int payment = global + 1;
+  static const int authentication = payment + 1;
+  static const int china = authentication + 1;
+
+  Domain(int type, String rawValue) : super(typeValue: type, rawValue: rawValue);
+
+  factory Domain.getGlobal() => Domain(Domain.global, "https://api.farfetch.net");
+  factory Domain.getPayment() => Domain(Domain.payment, "https://paymentsapi.farfetch.net");
+  factory Domain.getAuthentication() => Domain(Domain.authentication, "https://api.farfetch.net/ext/auth");
+  factory Domain.getChina() => Domain(Domain.china, "https://channel-service-panda.farfetch.net");
 }
 
-class Domain {
-  static const String global = "https://api.farfetch.net";
-  static const String payment = "https://paymentsapi.farfetch.net";
-  static const String authentication = "https://api.farfetch.net/ext/auth";
-  static const String china = "https://channel-service-panda.farfetch.net";
-}
-
-class Endpoint {
-  final enumApiType apiType;
+// Endpoint about base Endpoint URL settings
+class Endpoint extends EnumType<int, String> {
   String apiPath;
 
-  Endpoint({@required this.apiType, @required this.apiPath});
+  Endpoint({int apiType, this.apiPath, String rawValue}) : super(typeValue: apiType, rawValue: rawValue);
 
-  String path() {
-    return ((apiPath.matchAsPrefix("/") != null) ? apiPath.substring(1) : apiPath);
-  }
+  String path() => ((apiPath.matchAsPrefix("/") != null) ? apiPath.substring(1) : apiPath);
 
-  String url() {
-    return this.baseURL() + "/" + this.path();
-  }
+  String url() => this.baseURL() + "/" + this.path();
 
-  bool needAuth() {
-    return (apiType != enumApiType.almirCMS &&
-        this.path() != Endpoint._requestTokenPath &&
-        this.path() != _revokeTokenPath);
-  }
+  bool needAuth() => (this.typeValue != ApiType.almirCMS &&
+      this.path() != Endpoint._requestTokenPath().rawValue &&
+      this.path() != Endpoint._revokeTokenPath().rawValue);
 
   int timeoutInternal() {
-    if (this.apiType == enumApiType.abTesting) {
+    if (this.typeValue == ApiType.abTesting) {
       return 60;
     }
     return (globals.debugModel == true) ? 30 : 2;
@@ -71,30 +81,28 @@ class Endpoint {
   }
 
   String productURL() {
-    switch (this.apiType) {
-      case enumApiType.eCommerce:
-        return Domain.global;
+    switch (this.typeValue) {
+      case ApiType.eCommerce:
+        return Domain.getGlobal().rawValue;
 
-      case enumApiType.authentication:
-        return Domain.authentication;
+      case ApiType.authentication:
+        return Domain.getAuthentication().rawValue;
 
-      case enumApiType.payment:
-        return Domain.payment;
+      case ApiType.payment:
+        return Domain.getPayment().rawValue;
 
-      case enumApiType.content:
-      case enumApiType.almirCMS:
-      case enumApiType.marketing:
-      case enumApiType.abTesting:
-      case enumApiType.channelService:
-        return Domain.china;
+      case ApiType.content:
+      case ApiType.almirCMS:
+      case ApiType.marketing:
+      case ApiType.abTesting:
+      case ApiType.channelService:
+        return Domain.getChina().rawValue;
     }
     return "";
   }
 
-  String developmentURL() {
-    return "";
-  }
+  String developmentURL() => "";
 
-  static const String _requestTokenPath = "connect/token";
-  static const String _revokeTokenPath = "connect/revocation";
+  factory Endpoint._requestTokenPath() => Endpoint(rawValue: "connect/token");
+  factory Endpoint._revokeTokenPath() => Endpoint(rawValue: "connect/revocation");
 }

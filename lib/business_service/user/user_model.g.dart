@@ -21,7 +21,10 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) {
       wishlistId: json['wishlistId'] as String,
       personalShopperId: json['personalShopperId'] as int,
       receiveNewsletters: json['receiveNewsletters'] as bool,
-      expiryDate: DateTime.parse(json['expiryDate'] as String));
+      expiryDate: DateTime.parse(json['expiryDate'] as String))
+    ..benefits = (json['benefits'] as List)
+        .map((e) => BenefitModel.fromJson(e as Map<String, dynamic>))
+        .toList();
 }
 
 Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
@@ -38,21 +41,6 @@ Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
       'wishlistId': instance.wishlistId,
       'personalShopperId': instance.personalShopperId,
       'receiveNewsletters': instance.receiveNewsletters,
-      'expiryDate': instance.expiryDate.toIso8601String()
-    };
-
-BenefitModel _$BenefitModelFromJson(Map<String, dynamic> json) {
-  return BenefitModel(
-      id: json['id'] as String,
-      code: json['code'] as String,
-      isActive: json['isActive'] as bool,
-      metadata: json['metadata'] as Map<String, dynamic>);
-}
-
-Map<String, dynamic> _$BenefitModelToJson(BenefitModel instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'code': instance.code,
-      'isActive': instance.isActive,
-      'metadata': instance.metadata
+      'expiryDate': instance.expiryDate.toIso8601String(),
+      'benefits': instance.benefits
     };

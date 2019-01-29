@@ -18,9 +18,10 @@ dependencies:
   # farfetch packages
 
   flutter_panda_foundation:
-    git:
-      url: https://github.com/derrick-zhu/flutter_panda_foundation.git
-      ref: develop
+    path: ../flutter_panda_foundation/
+#    git:
+#      url: https://github.com/derrick-zhu/flutter_panda_foundation.git
+#      ref: develop
 
 dev_dependencies:
   flutter_test:
