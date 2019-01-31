@@ -8,20 +8,16 @@
  */
 
 import 'package:flutter_panda_foundation/flutter_panda_foundation.dart';
-import 'package:flutter_panda_service/restful_service/response.dart';
+import 'response.dart';
 
 enum EncodingFailedReasonType { missingURL, jsonEncodingFailed }
 
 class EncodingFailedReason extends EnumType<EncodingFailedReasonType, Error> {
-  EncodingFailedReason(EncodingFailedReasonType type, {Error rawValue})
-      : super(typeValue: type, rawValue: rawValue);
+  EncodingFailedReason(EncodingFailedReasonType type, {Error rawValue}) : super(typeValue: type, rawValue: rawValue);
 
-  factory EncodingFailedReason.missingURL() =>
-      EncodingFailedReason(EncodingFailedReasonType.missingURL);
+  factory EncodingFailedReason.missingURL() => EncodingFailedReason(EncodingFailedReasonType.missingURL);
 
-  factory EncodingFailedReason.jsonEncodingFailed(Error err) =>
-      EncodingFailedReason(EncodingFailedReasonType.jsonEncodingFailed,
-          rawValue: err);
+  factory EncodingFailedReason.jsonEncodingFailed(Error err) => EncodingFailedReason(EncodingFailedReasonType.jsonEncodingFailed, rawValue: err);
 
   String localizedDescription() {
     if (this.typeValue == EncodingFailedReasonType.missingURL) {
@@ -34,55 +30,48 @@ class EncodingFailedReason extends EnumType<EncodingFailedReasonType, Error> {
   }
 }
 
-enum RestfulErrorType {
-  timeout,
-  notConnectedToInternet,
-  invalidURL,
-  encodingFailed,
-  responseValidationFailed
-}
+class RestfulError extends EnumType<int, String> {
+  static const int timeout = 0;
+  static const int notConnectedToInternet = timeout + 1;
+  static const int invalidURL = notConnectedToInternet + 1;
+  static const int encodingFailed = invalidURL + 1;
+  static const int responseValidationFailed = encodingFailed + 1;
 
-class RestfulError extends EnumType<RestfulErrorType, String> {
   final String url;
   final EncodingFailedReason reason;
   final Response response;
 
-  RestfulErrorType errorType;
+  int errorType;
 
   RestfulError(
-    RestfulErrorType type, {
+    int type, {
     String rawValue,
     this.url,
     this.reason,
     this.response,
   }) : super(typeValue: type, rawValue: rawValue);
 
-  factory RestfulError.timeout() => RestfulError(RestfulErrorType.timeout);
+  factory RestfulError.getTimeout() => RestfulError(RestfulError.timeout);
 
-  factory RestfulError.notConnectedToInternet() =>
-      RestfulError(RestfulErrorType.notConnectedToInternet);
+  factory RestfulError.getNotConnectedToInternet() => RestfulError(RestfulError.notConnectedToInternet);
 
-  factory RestfulError.invalidURL(String url) =>
-      RestfulError(RestfulErrorType.invalidURL, url: url);
+  factory RestfulError.getInvalidURL(String url) => RestfulError(RestfulError.invalidURL, url: url);
 
-  factory RestfulError.encodingFailed(EncodingFailedReason reason) =>
-      RestfulError(RestfulErrorType.encodingFailed, reason: reason);
+  factory RestfulError.getEncodingFailed(EncodingFailedReason reason) => RestfulError(RestfulError.encodingFailed, reason: reason);
 
-  factory RestfulError.responseValidationFailed(Response response) =>
-      RestfulError(RestfulErrorType.responseValidationFailed,
-          response: response);
+  factory RestfulError.getResponseValidationFailed(Response response) => RestfulError(RestfulError.responseValidationFailed, response: response);
 
   String errorDescription() {
     switch (this.errorType) {
-      case RestfulErrorType.timeout:
+      case RestfulError.timeout:
         return "Timeout";
-      case RestfulErrorType.notConnectedToInternet:
+      case RestfulError.notConnectedToInternet:
         return "Cannot connect to internet";
-      case RestfulErrorType.invalidURL:
+      case RestfulError.invalidURL:
         return "URL is not valid: ${this.url}";
-      case RestfulErrorType.encodingFailed:
+      case RestfulError.encodingFailed:
         return "${this.reason.localizedDescription()}";
-      case RestfulErrorType.responseValidationFailed:
+      case RestfulError.responseValidationFailed:
         return "Response status code was unacceptable: ${this.response.originalResponse.statusCode}";
       default:
         return "** error: unknown error";

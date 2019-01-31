@@ -12,32 +12,34 @@ import 'dart:math';
 import 'package:flutter_panda_foundation/flutter_panda_foundation.dart';
 import 'package:sprintf/sprintf.dart';
 
-enum ArrayEncodingEnum { brackets, noBrackets }
+class ArrayEncoding extends EnumType<int, String> {
+  static const int brackets = 0;
+  static const int noBrackets = brackets + 1;
 
-class ArrayEncoding extends EnumType<ArrayEncodingEnum, String> {
-  ArrayEncoding(ArrayEncodingEnum type, String rawValue) : super(typeValue: type, rawValue: rawValue);
+  ArrayEncoding(int type, String rawValue) : super(typeValue: type, rawValue: rawValue);
 
   String encode(String key) {
     switch (this.typeValue) {
-      case ArrayEncodingEnum.brackets:
+      case ArrayEncoding.brackets:
         return "$key[]";
-      case ArrayEncodingEnum.noBrackets:
+      case ArrayEncoding.noBrackets:
         return key;
     }
     return "";
   }
 }
 
-enum BoolEncodingEnum { numeric, literal }
+class BoolEncoding extends EnumType<int, String> {
+  static const int numeric = 0;
+  static const int literal = numeric + 1;
 
-class BoolEncoding extends EnumType<BoolEncodingEnum, String> {
-  BoolEncoding(BoolEncodingEnum type, String value) : super(typeValue: type, rawValue: value);
+  BoolEncoding(int type, String value) : super(typeValue: type, rawValue: value);
 
   String encoding(bool value) {
     switch (this.typeValue) {
-      case BoolEncodingEnum.numeric:
+      case BoolEncoding.numeric:
         return value ? "1" : "0";
-      case BoolEncodingEnum.literal:
+      case BoolEncoding.literal:
         return value ? "true" : "false";
     }
     return "";

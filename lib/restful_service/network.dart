@@ -20,13 +20,12 @@ class RestfulResult {
 
   RestfulResult({@required this.response, this.error});
 
-  factory RestfulResult.success(Response response) =>
-      RestfulResult(response: response);
-  factory RestfulResult.failure(Response response, Error error) =>
-      RestfulResult(response: response, error: error);
+  factory RestfulResult.success(Response response) => RestfulResult(response: response);
+  factory RestfulResult.failure(Response response, Error error) => RestfulResult(response: response, error: error);
 }
 
 enum RestfulMethodType { options, get, head, post, put, patch, delete, trace, connect }
+
 // RestfulMethod method for RESTful request.
 class RestfulMethod extends EnumType<RestfulMethodType, String> {
   RestfulMethod(RestfulMethodType method, String rawValue) : super(typeValue: method, rawValue: rawValue);
@@ -43,12 +42,13 @@ class RestfulMethod extends EnumType<RestfulMethodType, String> {
 }
 
 enum ContentTypeEnum { none, json, formURLEncoded, multipartFormData }
+
 // ContentType content type for RESTful request.
 class ContentType extends EnumType<ContentTypeEnum, String> {
-  ContentType(ContentTypeEnum type, String rawValue) : super(typeValue: type, rawValue: rawValue);
+  const ContentType(ContentTypeEnum type, String rawValue) : super(typeValue: type, rawValue: rawValue);
 
-  factory ContentType.none() => ContentType(ContentTypeEnum.none, "");
-  factory ContentType.json() => ContentType(ContentTypeEnum.json, "application/json");
-  factory ContentType.formURLEncoded() => ContentType(ContentTypeEnum.formURLEncoded ,"application/x-www-form-urlencoded");
-  factory ContentType.multipartFormData() => ContentType(ContentTypeEnum.multipartFormData ,"multipart/form-data; boundary=");
+  factory ContentType.none() => const ContentType(ContentTypeEnum.none, "");
+  factory ContentType.json() => const ContentType(ContentTypeEnum.json, "application/json");
+  factory ContentType.formURLEncoded() => const ContentType(ContentTypeEnum.formURLEncoded, "application/x-www-form-urlencoded");
+  factory ContentType.multipartFormData() => const ContentType(ContentTypeEnum.multipartFormData, "multipart/form-data; boundary=");
 }

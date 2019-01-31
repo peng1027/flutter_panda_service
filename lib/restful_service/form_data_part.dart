@@ -12,11 +12,11 @@ import 'dart:convert';
 import 'package:flutter_panda_foundation/flutter_panda_foundation.dart';
 
 class FormDataPartType extends EnumType<int, String> {
-  FormDataPartType(int type, String rawValue) : super(typeValue: type, rawValue: rawValue);
-
   static const int data = 0;
   static const int png = data + 1;
   static const int jpg = png + 1;
+
+  FormDataPartType(int type, String rawValue) : super(typeValue: type, rawValue: rawValue);
 
   factory FormDataPartType.getData() => FormDataPartType(FormDataPartType.data, "application/octet-stream");
   factory FormDataPartType.getPng() => FormDataPartType(FormDataPartType.png, "image/png");

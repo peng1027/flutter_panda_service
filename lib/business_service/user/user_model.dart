@@ -59,8 +59,7 @@ class UserModel {
     this.receiveNewsletters,
     this.expiryDate,
   });
-  factory UserModel.fromJson(Map<String, dynamic> json) =>
-      _$UserModelFromJson(json);
+  factory UserModel.fromJson(Map<String, dynamic> json) => _$UserModelFromJson(json);
   Map<String, dynamic> toJson() => _$UserModelToJson(this);
 
   UserModel.copy(
@@ -86,6 +85,8 @@ class UserModel {
   }
 
   bool isGuest() => username.isEmpty;
+
+  UserType get userType => this.isGuest() ? UserType.guest : UserType.registered;
 
   String firstName() {
     List<String> names = this.name.split(" ");
@@ -114,32 +115,20 @@ class UserModel {
   static const String metadataCampaignCode = "campaign-code";
   static const String metadataCampaignInviteOnly = "invite-only";
 
-  bool get hasAnyActiveBenefits =>
-      this.benefits.map((benefit) => benefit.isActive).toList().isNotEmpty;
+  bool get hasAnyActiveBenefits => this.benefits.map((benefit) => benefit.isActive).toList().isNotEmpty;
 
-  bool get hasInviteOnlyBenefit =>
-      this.hasMetadata(metadataCampaignInviteOnly, privateSaleBenefit);
+  bool get hasInviteOnlyBenefit => this.hasMetadata(metadataCampaignInviteOnly, privateSaleBenefit);
 
-  bool get hasPrivateSaleBenefit =>
-      this.benefitWith(privateSaleBenefit) != null;
+  bool get hasPrivateSaleBenefit => this.benefitWith(privateSaleBenefit) != null;
 
-  bool get hasVIPPrivateSaleBenefit =>
-      benefitWith(vipPrivateSaleBenefit) != null;
+  bool get hasVIPPrivateSaleBenefit => benefitWith(vipPrivateSaleBenefit) != null;
 
-  bool get hasRestrictedBrandsBenefit =>
-      benefitWith(restrictedBrandsBenefit) != null;
+  bool get hasRestrictedBrandsBenefit => benefitWith(restrictedBrandsBenefit) != null;
 
   bool get hasPrivateClientBenefit => benefitWith(privateClientBenefit) != null;
 
   BenefitModel benefitWith(String name) {
-    List<BenefitModel> arr = this
-        .benefits
-        .map((benefit) => (benefit.code != null &&
-                benefit.isActive &&
-                benefit.code.toLowerCase() == name.toLowerCase())
-            ? benefit
-            : null)
-        .toList();
+    List<BenefitModel> arr = this.benefits.map((benefit) => (benefit.code != null && benefit.isActive && benefit.code.toLowerCase() == name.toLowerCase()) ? benefit : null).toList();
 
     if (arr.length > 0) {
       return arr.first;
@@ -161,8 +150,7 @@ class UserModel {
   ////////////////////////////////////////////////////////////////////////////
 
   UserTier get tier {
-    List<BenefitModel> activeBenefits =
-        this.benefits.where((benefit) => benefit.isActive).toList();
+    List<BenefitModel> activeBenefits = this.benefits.where((benefit) => benefit.isActive).toList();
 
     List<UserTier> validTiers = List<UserTier>();
     for (final benefit in activeBenefits) {
@@ -207,8 +195,7 @@ class UserModel {
 
   List<BenefitModel> saleLandingBenefitMapOnContentApiRetrieval() {
     if (this.hasVIPPrivateSaleBenefit) {
-      BenefitModel benefit =
-          this._composeBenefitModelFor(UserTier.privateClient);
+      BenefitModel benefit = this._composeBenefitModelFor(UserTier.privateClient);
       if (benefit != null) {
         return [benefit];
       }
@@ -229,10 +216,6 @@ class UserModel {
       return null;
     }
 
-    return BenefitModel(
-        id: accessCode,
-        code: accessCode,
-        isActive: true,
-        metadata: Map<String, dynamic>());
+    return BenefitModel(id: accessCode, code: accessCode, isActive: true, metadata: Map<String, dynamic>());
   }
 }
