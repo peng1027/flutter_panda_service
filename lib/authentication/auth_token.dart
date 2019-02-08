@@ -1,9 +1,8 @@
 /*
- *
- * AuthToken.dart
+ * auth_token.dart
  * flutter_panda_service
  *
- * Developed by zhudelun on 2/3/19 12:39 AM.
+ * Developed by zhudelun on 2/8/19 1:49 AM.
  * Copyright (c) 2019 by Farfetch. All rights reserved.
  *
  */
@@ -12,17 +11,17 @@ import 'dart:convert';
 
 import 'package:flutter_panda_foundation/flutter_panda_foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'JSONWebToken.dart';
+import 'json_web_token.dart';
 
-import 'Authentication.dart';
+import 'authentication.dart';
 
-part 'AuthToken.g.dart';
+part 'auth_token.g.dart';
 
 class TypeHint extends EnumValue<String> {
-  TypeHint(String value) : super(rawValue: value);
+  const TypeHint(String value) : super(value);
 
-  static TypeHint accessToken() => TypeHint("access_token");
-  static TypeHint refreshToken() => TypeHint("refresh_token");
+  static TypeHint accessToken() => const TypeHint("access_token");
+  static TypeHint refreshToken() => const TypeHint("refresh_token");
 }
 
 @JsonSerializable(nullable: true)
@@ -97,7 +96,7 @@ class AuthToken {
 
   String _accessToken;
   String _scope;
-  GrantType _grantType = GrantType.getClientCredentials();
+  GrantType _grantType = GrantType.ClientCredentials;
 }
 
 enum AuthTokenState { valid, needRefresh, invalid }
@@ -156,7 +155,7 @@ class AuthTokenWrapper {
 
   get _isValid {
     if (!hasRefreshToken &&
-        _authToken._grantType == GrantType.getClientCredentials() &&
+        _authToken._grantType == GrantType.ClientCredentials &&
         Authentication.instance.keyValueStore.guestID != null) {
       return Authentication.instance.keyValueStore.guestID == this.guestID ? _isExpired : false;
     } else {

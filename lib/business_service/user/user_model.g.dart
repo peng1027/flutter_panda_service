@@ -1,3 +1,12 @@
+/*
+ * user_model.g.dart
+ * flutter_panda_service
+ *
+ * Developed by zhudelun on 2/8/19 1:49 AM.
+ * Copyright (c) 2019 by Farfetch. All rights reserved.
+ *
+ */
+
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 part of 'user_model.dart';
@@ -22,9 +31,7 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) {
       personalShopperId: json['personalShopperId'] as int,
       receiveNewsletters: json['receiveNewsletters'] as bool,
       expiryDate: DateTime.parse(json['expiryDate'] as String))
-    ..benefits = (json['benefits'] as List)
-        .map((e) => BenefitModel.fromJson(e as Map<String, dynamic>))
-        .toList();
+    ..benefits = (json['benefits'] as List).map((e) => BenefitModel.fromJson(e as Map<String, dynamic>)).toList();
 }
 
 Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{

@@ -2,8 +2,8 @@
  * form_data_part.dart
  * flutter_panda_service
  *
- * Developed by zhudelun on 1/31/19 12:49 AM
- * Copyright (c) 2019. Farfetch. All rights reserved.
+ * Developed by zhudelun on 2/8/19 1:49 AM.
+ * Copyright (c) 2019 by Farfetch. All rights reserved.
  *
  */
 
@@ -16,16 +16,14 @@ class FormDataPartType extends EnumType<int, String> {
   static const int png = data + 1;
   static const int jpg = png + 1;
 
-  FormDataPartType(int type, String rawValue) : super(typeValue: type, rawValue: rawValue);
+  const FormDataPartType(int type, String rawValue) : super(type, rawValue);
 
-  factory FormDataPartType.getData() => FormDataPartType(FormDataPartType.data, "application/octet-stream");
-  factory FormDataPartType.getPng() => FormDataPartType(FormDataPartType.png, "image/png");
-  factory FormDataPartType.getJpg() => FormDataPartType(FormDataPartType.jpg, "image/jpeg");
+  static const FormDataPartType Data = const FormDataPartType(FormDataPartType.data, "application/octet-stream");
+  static const FormDataPartType Png = const FormDataPartType(FormDataPartType.png, "image/png");
+  static const FormDataPartType Jpg = const FormDataPartType(FormDataPartType.jpg, "image/jpeg");
 }
 
 class FormDataPart {
-  final String boundary = "";
-
   final List<int> data;
   final String name;
   final String fileName;
@@ -33,9 +31,9 @@ class FormDataPart {
 
   FormDataPart({this.data, this.name, this.fileName, this.mineType});
 
-  List<int> formData() {
+  List<int> formData(String boundary) {
     String body = "";
-    body += "--${this.boundary}\r\n";
+    body += "--$boundary\r\n";
     body += "Content-Disposition: form-data; ";
     body += "name=\"${this.name}\"";
     if (this.fileName.isNotEmpty) {
@@ -47,6 +45,6 @@ class FormDataPart {
     var data = utf8.encode(body);
     var end = utf8.encode("\r\n");
 
-    return [data, this.data, end].expand((pair) => pair).toList();
+    return [data, this.data, end].expand((pair) => pair);
   }
 }

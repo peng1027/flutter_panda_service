@@ -1,5 +1,5 @@
 /*
- * AccountManager.dart
+ * auth_credentials_protocol.dart
  * flutter_panda_service
  *
  * Developed by zhudelun on 2/8/19 1:49 AM.
@@ -7,4 +7,7 @@
  *
  */
 
-class AccountManager {}
+abstract class AuthCredentialsProtocol {
+  String get apiClientID;
+  String get apiClientSecret;
+}

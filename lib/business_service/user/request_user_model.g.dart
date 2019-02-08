@@ -1,3 +1,12 @@
+/*
+ * request_user_model.g.dart
+ * flutter_panda_service
+ *
+ * Developed by zhudelun on 2/8/19 1:49 AM.
+ * Copyright (c) 2019 by Farfetch. All rights reserved.
+ *
+ */
+
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 part of 'request_user_model.dart';
@@ -7,15 +16,11 @@ part of 'request_user_model.dart';
 // **************************************************************************
 
 RequestUserModel _$RequestUserModelFromJson(Map<String, dynamic> json) {
-  return RequestUserModel(json['email'] as String,
-      json['phoneNumber'] as String, json['countryCode'] as String,
-      username: json['username'] as String,
-      password: json['password'] as String,
-      name: json['name'] as String);
+  return RequestUserModel(json['email'] as String, json['phoneNumber'] as String, json['countryCode'] as String,
+      username: json['username'] as String, password: json['password'] as String, name: json['name'] as String);
 }
 
-Map<String, dynamic> _$RequestUserModelToJson(RequestUserModel instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$RequestUserModelToJson(RequestUserModel instance) => <String, dynamic>{
       'username': instance.username,
       'password': instance.password,
       'name': instance.name,
@@ -25,32 +30,15 @@ Map<String, dynamic> _$RequestUserModelToJson(RequestUserModel instance) =>
     };
 
 RequestGuestModel _$RequestGuestModelFromJson(Map<String, dynamic> json) {
-  return RequestGuestModel(
-      countryCode: json['countryCode'] as String,
-      ip: json['ip'] as String,
-      externalId: json['externalId'] as String,
-      friendId: json['friendId'] as String);
+  return RequestGuestModel(countryCode: json['countryCode'] as String, ip: json['ip'] as String, externalId: json['externalId'] as String, friendId: json['friendId'] as String);
 }
 
 Map<String, dynamic> _$RequestGuestModelToJson(RequestGuestModel instance) =>
-    <String, dynamic>{
-      'countryCode': instance.countryCode,
-      'ip': instance.ip,
-      'externalId': instance.externalId,
-      'friendId': instance.friendId
-    };
+    <String, dynamic>{'countryCode': instance.countryCode, 'ip': instance.ip, 'externalId': instance.externalId, 'friendId': instance.friendId};
 
 ChangePasswordModel _$ChangePasswordModelFromJson(Map<String, dynamic> json) {
-  return ChangePasswordModel(
-      username: json['username'] as String,
-      oldPassword: json['oldPassword'] as String,
-      newPassword: json['newPassword'] as String);
+  return ChangePasswordModel(username: json['username'] as String, oldPassword: json['oldPassword'] as String, newPassword: json['newPassword'] as String);
 }
 
-Map<String, dynamic> _$ChangePasswordModelToJson(
-        ChangePasswordModel instance) =>
-    <String, dynamic>{
-      'username': instance.username,
-      'oldPassword': instance.oldPassword,
-      'newPassword': instance.newPassword
-    };
+Map<String, dynamic> _$ChangePasswordModelToJson(ChangePasswordModel instance) =>
+    <String, dynamic>{'username': instance.username, 'oldPassword': instance.oldPassword, 'newPassword': instance.newPassword};

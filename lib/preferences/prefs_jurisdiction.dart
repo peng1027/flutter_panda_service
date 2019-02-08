@@ -2,8 +2,8 @@
  * prefs_jurisdiction.dart
  * flutter_panda_service
  *
- * Developed by zhudelun on 2/1/19 4:35 AM
- * Copyright (c) 2019. Farfetch. All rights reserved.
+ * Developed by zhudelun on 2/8/19 1:49 AM.
+ * Copyright (c) 2019 by Farfetch. All rights reserved.
  *
  */
 
@@ -21,10 +21,10 @@ class TaxDutiesSetting extends EnumValue<String> {
   static const String deliveredAtPlace = "Dap";
   static const String deliveredDutyPaid = "Ddp";
 
-  TaxDutiesSetting([String type]) : super(rawValue: type);
+  const TaxDutiesSetting([String type]) : super(type);
 
-  factory TaxDutiesSetting.getDeliveredAtPlace() => TaxDutiesSetting(TaxDutiesSetting.deliveredAtPlace);
-  factory TaxDutiesSetting.getDeliveredDutyPaid() => TaxDutiesSetting(TaxDutiesSetting.deliveredDutyPaid);
+  static const TaxDutiesSetting DeliveredAtPlace = const TaxDutiesSetting(TaxDutiesSetting.deliveredAtPlace);
+  static const TaxDutiesSetting DeliveredDutyPaid = const TaxDutiesSetting(TaxDutiesSetting.deliveredDutyPaid);
 
   int intValue() {
     if (this.rawValue == deliveredAtPlace) {

@@ -2,33 +2,33 @@
  * prefs_default_locale.dart
  * flutter_panda_service
  *
- * Developed by zhudelun on 2/1/19 4:31 AM
- * Copyright (c) 2019. Farfetch. All rights reserved.
+ * Developed by zhudelun on 2/8/19 1:49 AM.
+ * Copyright (c) 2019 by Farfetch. All rights reserved.
  *
  */
 
 import 'package:flutter_panda_foundation/flutter_panda_foundation.dart';
 
 class PrefsDefaultLocale extends EnumValue<String> {
-  PrefsDefaultLocale(String value) : super(rawValue: value);
+  const PrefsDefaultLocale(String value) : super(value);
 
-  factory PrefsDefaultLocale.countryCode() => PrefsDefaultLocale("CN");
-  factory PrefsDefaultLocale.countryName() => PrefsDefaultLocale("中国内地");
-  factory PrefsDefaultLocale.countryCulture() => PrefsDefaultLocale("zh-CN");
-  factory PrefsDefaultLocale.currencyCode() => PrefsDefaultLocale("CNY");
-  factory PrefsDefaultLocale.currencyCulture() => PrefsDefaultLocale("zh-CN");
-  factory PrefsDefaultLocale.languageCode() => PrefsDefaultLocale("zh-CN");
+  static const PrefsDefaultLocale countryCode = const PrefsDefaultLocale("CN");
+  static const PrefsDefaultLocale countryName = const PrefsDefaultLocale("中国内地");
+  static const PrefsDefaultLocale countryCulture = const PrefsDefaultLocale("zh-CN");
+  static const PrefsDefaultLocale currencyCode = const PrefsDefaultLocale("CNY");
+  static const PrefsDefaultLocale currencyCulture = const PrefsDefaultLocale("zh-CN");
+  static const PrefsDefaultLocale languageCode = const PrefsDefaultLocale("zh-CN");
 }
 
 class PrefsKey extends EnumValue<String> {
-  PrefsKey(String value) : super(rawValue: value);
+  const PrefsKey(String value) : super(value);
 
-  factory PrefsKey.countryID() => PrefsKey("JurisdictionCountryId");
-  factory PrefsKey.countryCode() => PrefsKey("JurisdictionCountryCode");
-  factory PrefsKey.countryName() => PrefsKey("JurisdictionCountryName");
-  factory PrefsKey.countryCulture() => PrefsKey("JurisdictionCountryCulture");
-  factory PrefsKey.currencyCode() => PrefsKey("JurisdictionCurrencyCode");
-  factory PrefsKey.currencyCulture() => PrefsKey("JurisdictionCurrencyCulture");
-  factory PrefsKey.languageCode() => PrefsKey("JurisdictionLanguage");
-  factory PrefsKey.taxDutiesSetting() => PrefsKey("JurisdictionTaxDutiesSetting");
+  static const PrefsKey countryID = const PrefsKey("JurisdictionCountryId");
+  static const PrefsKey countryCode = const PrefsKey("JurisdictionCountryCode");
+  static const PrefsKey countryName = const PrefsKey("JurisdictionCountryName");
+  static const PrefsKey countryCulture = const PrefsKey("JurisdictionCountryCulture");
+  static const PrefsKey currencyCode = const PrefsKey("JurisdictionCurrencyCode");
+  static const PrefsKey currencyCulture = const PrefsKey("JurisdictionCurrencyCulture");
+  static const PrefsKey languageCode = const PrefsKey("JurisdictionLanguage");
+  static const PrefsKey taxDutiesSetting = const PrefsKey("JurisdictionTaxDutiesSetting");
 }

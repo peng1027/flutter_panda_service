@@ -2,8 +2,8 @@
  * endpoints.dart
  * flutter_panda_service
  *
- * Developed by zhudelun on 1/29/19 1:54 AM
- * Copyright (c) 2019. Farfetch. All rights reserved.
+ * Developed by zhudelun on 2/8/19 1:49 AM.
+ * Copyright (c) 2019 by Farfetch. All rights reserved.
  *
  */
 
@@ -15,7 +15,7 @@ import 'package:sprintf/sprintf.dart';
 import '../flutter_panda_service.dart' as globals;
 
 class ApiType extends EnumType<int, String> {
-  ApiType(int type, String rawValue) : super(typeValue: type, rawValue: rawValue);
+  const ApiType(int type, String rawValue) : super(type, rawValue);
 
   static const int eCommerce = 0;
   static const int content = eCommerce + 1;
@@ -26,14 +26,14 @@ class ApiType extends EnumType<int, String> {
   static const int authentication = abTesting + 1;
   static const int channelService = authentication + 1;
 
-  factory ApiType.getECommerce() => ApiType(ApiType.eCommerce, "eCommerce");
-  factory ApiType.getContent() => ApiType(ApiType.content, "content");
-  factory ApiType.getPayment() => ApiType(ApiType.payment, "payment");
-  factory ApiType.getAlmirCMS() => ApiType(ApiType.almirCMS, "almirCMS");
-  factory ApiType.getMarketing() => ApiType(ApiType.marketing, "marketing");
-  factory ApiType.getAbTesting() => ApiType(ApiType.abTesting, "abTesting");
-  factory ApiType.getAuthentication() => ApiType(ApiType.authentication, "authentication");
-  factory ApiType.getChannelService() => ApiType(ApiType.channelService, "channelService");
+  static const ApiType ECommerce = const ApiType(ApiType.eCommerce, "eCommerce");
+  static const ApiType Content = const ApiType(ApiType.content, "content");
+  static const ApiType Payment = const ApiType(ApiType.payment, "payment");
+  static const ApiType AlmirCMS = const ApiType(ApiType.almirCMS, "almirCMS");
+  static const ApiType Marketing = const ApiType(ApiType.marketing, "marketing");
+  static const ApiType AbTesting = const ApiType(ApiType.abTesting, "abTesting");
+  static const ApiType Authentication = const ApiType(ApiType.authentication, "authentication");
+  static const ApiType ChannelService = const ApiType(ApiType.channelService, "channelService");
 }
 
 class Domain extends EnumType<int, String> {
@@ -42,19 +42,19 @@ class Domain extends EnumType<int, String> {
   static const int authentication = payment + 1;
   static const int china = authentication + 1;
 
-  Domain(int type, String rawValue) : super(typeValue: type, rawValue: rawValue);
+  const Domain(int type, String rawValue) : super(type, rawValue);
 
-  factory Domain.getGlobal() => Domain(Domain.global, "https://api.farfetch.net");
-  factory Domain.getPayment() => Domain(Domain.payment, "https://paymentsapi.farfetch.net");
-  factory Domain.getAuthentication() => Domain(Domain.authentication, "https://api.farfetch.net/ext/auth");
-  factory Domain.getChina() => Domain(Domain.china, "https://channel-service-panda.farfetch.net");
+  static const Domain Global = const Domain(Domain.global, "https://api.farfetch.net");
+  static const Domain Payment = const Domain(Domain.payment, "https://paymentsapi.farfetch.net");
+  static const Domain Authentication = const Domain(Domain.authentication, "https://api.farfetch.net/ext/auth");
+  static const Domain China = const Domain(Domain.china, "https://channel-service-panda.farfetch.net");
 }
 
 // Endpoint about base Endpoint URL settings
 class Endpoint extends EnumType<int, String> {
   String apiPath;
 
-  Endpoint({int apiType, this.apiPath, String rawValue}) : super(typeValue: apiType, rawValue: rawValue);
+  Endpoint({int apiType, this.apiPath, String rawValue}) : super(apiType, rawValue);
 
   String path() => ((apiPath.matchAsPrefix("/") != null) ? apiPath.substring(1) : apiPath);
 
@@ -83,20 +83,20 @@ class Endpoint extends EnumType<int, String> {
   String productURL() {
     switch (this.typeValue) {
       case ApiType.eCommerce:
-        return Domain.getGlobal().rawValue;
+        return Domain.Global.rawValue;
 
       case ApiType.authentication:
-        return Domain.getAuthentication().rawValue;
+        return Domain.Authentication.rawValue;
 
       case ApiType.payment:
-        return Domain.getPayment().rawValue;
+        return Domain.Payment.rawValue;
 
       case ApiType.content:
       case ApiType.almirCMS:
       case ApiType.marketing:
       case ApiType.abTesting:
       case ApiType.channelService:
-        return Domain.getChina().rawValue;
+        return Domain.China.rawValue;
     }
     return "";
   }

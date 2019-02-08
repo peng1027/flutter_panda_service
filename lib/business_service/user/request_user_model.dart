@@ -2,8 +2,8 @@
  * request_user_model.dart
  * flutter_panda_service
  *
- * Developed by zhudelun on 1/30/19 3:58 AM
- * Copyright (c) 2019. Farfetch. All rights reserved.
+ * Developed by zhudelun on 2/8/19 1:49 AM.
+ * Copyright (c) 2019 by Farfetch. All rights reserved.
  *
  */
 
@@ -20,11 +20,9 @@ class RequestUserModel {
   final String phoneNumber;
   final String countryCode;
 
-  RequestUserModel(this.email, this.phoneNumber, this.countryCode,
-      {this.username, this.password, this.name});
+  RequestUserModel(this.email, this.phoneNumber, this.countryCode, {this.username, this.password, this.name});
 
-  factory RequestUserModel.fromJson(Map<String, dynamic> json) =>
-      _$RequestUserModelFromJson(json);
+  factory RequestUserModel.fromJson(Map<String, dynamic> json) => _$RequestUserModelFromJson(json);
   Map<String, dynamic> toJson() => _$RequestUserModelToJson(this);
 }
 
@@ -35,11 +33,9 @@ class RequestGuestModel {
   final String externalId;
   final String friendId;
 
-  RequestGuestModel(
-      {this.countryCode, this.ip, this.externalId, this.friendId});
+  RequestGuestModel({this.countryCode, this.ip, this.externalId, this.friendId});
 
-  factory RequestGuestModel.fromJson(Map<String, dynamic> json) =>
-      _$RequestGuestModelFromJson(json);
+  factory RequestGuestModel.fromJson(Map<String, dynamic> json) => _$RequestGuestModelFromJson(json);
   Map<String, dynamic> toJson() => _$RequestGuestModelToJson(this);
 }
 
@@ -51,7 +47,6 @@ class ChangePasswordModel {
 
   ChangePasswordModel({this.username, this.oldPassword, this.newPassword});
 
-  factory ChangePasswordModel.fromJson(Map<String, dynamic> json) =>
-      _$ChangePasswordModelFromJson(json);
+  factory ChangePasswordModel.fromJson(Map<String, dynamic> json) => _$ChangePasswordModelFromJson(json);
   Map<String, dynamic> toJson() => _$ChangePasswordModelToJson(this);
 }

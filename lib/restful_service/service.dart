@@ -2,8 +2,8 @@
  * service.dart
  * flutter_panda_service
  *
- * Developed by zhudelun on 1/30/19 10:53 PM
- * Copyright (c) 2019. Farfetch. All rights reserved.
+ * Developed by zhudelun on 2/8/19 1:49 AM.
+ * Copyright (c) 2019 by Farfetch. All rights reserved.
  *
  */
 
@@ -13,21 +13,21 @@ import 'package:flutter_panda_foundation/flutter_panda_foundation.dart';
 
 import '../business_service/service_comon.dart';
 import '../preferences/preferences.dart';
-import '../restful_service/network.dart';
+import 'http_network.dart';
 import 'endpoints.dart';
 import 'form_data_part.dart';
 
 abstract class RestfulParameter {}
 
 class HeaderKey extends EnumValue<String> {
-  HeaderKey(String value) : super(rawValue: value);
+  const HeaderKey(String value) : super(value);
 
-  factory HeaderKey.authorization() => HeaderKey("Authorization");
-  factory HeaderKey.country() => HeaderKey("FF-Country");
-  factory HeaderKey.currency() => HeaderKey("FF-Currency");
-  factory HeaderKey.language() => HeaderKey("Accept-Language");
-  factory HeaderKey.encoding() => HeaderKey("Accept-Encoding");
-  factory HeaderKey.requestId() => HeaderKey("X-SUMMER-RequestId");
+  static const HeaderKey authorization = const HeaderKey("Authorization");
+  static const HeaderKey country = const HeaderKey("FF-Country");
+  static const HeaderKey currency = const HeaderKey("FF-Currency");
+  static const HeaderKey language = const HeaderKey("Accept-Language");
+  static const HeaderKey encoding = const HeaderKey("Accept-Encoding");
+  static const HeaderKey requestId = const HeaderKey("X-SUMMER-RequestId");
 }
 
 class RestfulService {
@@ -40,11 +40,11 @@ class RestfulService {
   Map<String, String> buildHttpHeaders(Map<String, String> headers) {
     Map<String, String> allHTTPHeaders = headers ?? Map<String, String>();
 
-    allHTTPHeaders[HeaderKey.country().rawValue] = _prefs.countryCode();
-    allHTTPHeaders[HeaderKey.currency().rawValue] = _prefs.currencyCode();
-    allHTTPHeaders[HeaderKey.language().rawValue] = _prefs.languageCode();
-    allHTTPHeaders[HeaderKey.encoding().rawValue] = "gzip";
-    allHTTPHeaders[HeaderKey.requestId().rawValue] = UUID.uuidString();
+    allHTTPHeaders[HeaderKey.country.rawValue] = _prefs.countryCode();
+    allHTTPHeaders[HeaderKey.currency.rawValue] = _prefs.currencyCode();
+    allHTTPHeaders[HeaderKey.language.rawValue] = _prefs.languageCode();
+    allHTTPHeaders[HeaderKey.encoding.rawValue] = "gzip";
+    allHTTPHeaders[HeaderKey.requestId.rawValue] = UUID.uuidString();
 
     return allHTTPHeaders;
   }
@@ -53,12 +53,12 @@ class RestfulService {
 
   void request<T>({
     Endpoint endpoint,
-    RestfulMethod method,
+    HTTPMethod method,
     Map<String, String> headers,
     dynamic parameters,
     dynamic body,
     FormDataPart dataParts,
-    ContentType contentType,
+    HTTPContentType contentType,
     ServiceEntityCompletion<T> completion,
   }) {
     var allHttpHeaders = this.buildHttpHeaders(headers);

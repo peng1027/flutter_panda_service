@@ -1,5 +1,5 @@
 /*
- * AccountManager.dart
+ * key_chain_helper.dart
  * flutter_panda_service
  *
  * Developed by zhudelun on 2/8/19 1:49 AM.
@@ -7,4 +7,4 @@
  *
  */
 
-class AccountManager {}
+class KeyChainHelper {}

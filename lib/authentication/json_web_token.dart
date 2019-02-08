@@ -1,9 +1,8 @@
 /*
- *
- * JSONWebToken.dart
+ * json_web_token.dart
  * flutter_panda_service
  *
- * Developed by zhudelun on 2/7/19 10:01 PM.
+ * Developed by zhudelun on 2/8/19 1:49 AM.
  * Copyright (c) 2019 by Farfetch. All rights reserved.
  *
  */
@@ -14,9 +13,9 @@ import 'dart:typed_data';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:flutter_panda_foundation/flutter_panda_foundation.dart';
 
-import 'AuthToken.dart';
+import 'auth_token.dart';
 
-part 'JSONWebToken.g.dart';
+part 'json_web_token.g.dart';
 
 class IdentityProvider {
   /// Farfetch account login

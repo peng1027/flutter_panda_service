@@ -2,8 +2,8 @@
  * preferences.dart
  * flutter_panda_service
  *
- * Developed by zhudelun on 2/1/19 4:26 AM
- * Copyright (c) 2019. Farfetch. All rights reserved.
+ * Developed by zhudelun on 2/8/19 1:49 AM.
+ * Copyright (c) 2019 by Farfetch. All rights reserved.
  *
  */
 
@@ -27,29 +27,30 @@ class Preferences extends KeyValueStore implements JurisdictionProtocol {
 
   ////////////////////////////////////////////////////////////////////////
 
-  String countryCode() => this[PrefsKey.countryCode().rawValue] ?? PrefsDefaultLocale.countryCode();
-  setCountryCode(String countryCode) => this[PrefsKey.countryCode().rawValue] = countryCode;
+  String countryCode() => this[PrefsKey.countryCode.rawValue] ?? PrefsDefaultLocale.countryCode;
+  setCountryCode(String countryCode) => this[PrefsKey.countryCode.rawValue] = countryCode;
 
-  String countryCulture() => this[PrefsKey.countryCulture().rawValue] ?? PrefsDefaultLocale.countryCulture();
-  setCountryCulture(String countryCulture) => this[PrefsKey.countryCulture().rawValue] = countryCulture;
+  String countryCulture() => this[PrefsKey.countryCulture.rawValue] ?? PrefsDefaultLocale.countryCulture;
+  setCountryCulture(String countryCulture) => this[PrefsKey.countryCulture.rawValue] = countryCulture;
 
-  int countryID() => this[PrefsKey.countryID().rawValue] ?? null;
-  setCountryID(int countryID) => this[PrefsKey.countryID().rawValue] = countryID;
+  int countryID() => this[PrefsKey.countryID.rawValue] ?? null;
+  setCountryID(int countryID) => this[PrefsKey.countryID.rawValue] = countryID;
 
-  String countryName() => this[PrefsKey.countryName().rawValue] ?? PrefsDefaultLocale.countryName();
-  setCountryName(String countryName) => this[PrefsKey.countryName().rawValue] = countryName;
+  String countryName() => this[PrefsKey.countryName.rawValue] ?? PrefsDefaultLocale.countryName;
+  setCountryName(String countryName) => this[PrefsKey.countryName.rawValue] = countryName;
 
-  String currencyCode() => this[PrefsKey.currencyCode().rawValue] ?? PrefsDefaultLocale.currencyCode();
-  setCurrencyCode(String currencyCode) => this[PrefsKey.currencyCode().rawValue] = currencyCode;
+  String currencyCode() => this[PrefsKey.currencyCode.rawValue] ?? PrefsDefaultLocale.currencyCode;
+  setCurrencyCode(String currencyCode) => this[PrefsKey.currencyCode.rawValue] = currencyCode;
 
-  String currencyCulture() => this[PrefsKey.currencyCulture().rawValue] ?? PrefsDefaultLocale.currencyCulture();
-  setCurrencyCulture(String currencyCulture) => this[PrefsKey.currencyCulture().rawValue] = currencyCulture;
+  String currencyCulture() => this[PrefsKey.currencyCulture.rawValue] ?? PrefsDefaultLocale.currencyCulture;
+  setCurrencyCulture(String currencyCulture) => this[PrefsKey.currencyCulture.rawValue] = currencyCulture;
 
-  String languageCode() => this[PrefsKey.languageCode().rawValue] ?? PrefsDefaultLocale.languageCode();
-  setLanguageCode(String languageCode) => this[PrefsKey.languageCode().rawValue] = languageCode;
+  String languageCode() => this[PrefsKey.languageCode.rawValue] ?? PrefsDefaultLocale.languageCode;
+  setLanguageCode(String languageCode) => this[PrefsKey.languageCode.rawValue] = languageCode;
 
-  TaxDutiesSetting taxDutiesSetting() => this[PrefsKey.taxDutiesSetting().rawValue] ?? TaxDutiesSetting();
-  setTaxDutiesSetting(TaxDutiesSetting taxDutiesSetting) => this[PrefsKey.taxDutiesSetting().rawValue] = taxDutiesSetting.rawValue;
+  TaxDutiesSetting taxDutiesSetting() => this[PrefsKey.taxDutiesSetting.rawValue] ?? TaxDutiesSetting;
+  setTaxDutiesSetting(TaxDutiesSetting taxDutiesSetting) =>
+      this[PrefsKey.taxDutiesSetting.rawValue] = taxDutiesSetting.rawValue;
 
   void updateLocaleHeaders(LocaleHeader locale) {
     setCountryCode(locale.country);

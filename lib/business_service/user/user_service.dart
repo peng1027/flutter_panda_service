@@ -2,8 +2,8 @@
  * user_service.dart
  * flutter_panda_service
  *
- * Developed by zhudelun on 1/30/19 4:44 AM
- * Copyright (c) 2019. Farfetch. All rights reserved.
+ * Developed by zhudelun on 2/8/19 1:49 AM.
+ * Copyright (c) 2019 by Farfetch. All rights reserved.
  *
  */
 

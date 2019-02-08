@@ -12,9 +12,9 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  test: ^1.5.3      # unit test
 
   sprintf: ^4.0.0   # sprintf function
+  built_value: '>=5.5.5 <7.0.0'
 
   # farfetch packages
 
@@ -24,11 +24,18 @@ dependencies:
 #      url: https://github.com/derrick-zhu/flutter_panda_foundation.git
 #      ref: develop
 
+  flutter_panda_platform:
+    path: ../flutter_panda_platform/
+#    git:
+#      url: https://github.com/derrick-zhu/flutter_panda_platform.git
+#      ref: develop
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  build_runner: ^1.1.2      # help `json_serializable` and `json_annotation`
-  json_serializable: ^2.0.0 # JSON serialize
+  build_runner: ^1.1.2            # help `json_serializable` and `json_annotation`
+  json_serializable: ^2.0.0       # JSON serialize
+  built_value_generator: ^6.3.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec
