@@ -20,13 +20,13 @@ part 'auth_token.g.dart';
 class TypeHint extends EnumValue<String> {
   const TypeHint(String value) : super(value);
 
-  static TypeHint accessToken() => const TypeHint("access_token");
-  static TypeHint refreshToken() => const TypeHint("refresh_token");
+  static TypeHint get accessToken => const TypeHint("access_token");
+  static TypeHint get refreshToken => const TypeHint("refresh_token");
 }
 
 @JsonSerializable(nullable: true)
-class AuthToken {
-  AuthToken();
+class _AuthToken {
+  _AuthToken();
 
   @JsonKey(name: "token_type")
   String tokenType;
@@ -60,14 +60,12 @@ class AuthToken {
   String get scope => _scope;
 
   String get grantType => _grantType.rawValue;
-  set grantType(String newValue) {
-    _grantType = GrantType.fromJson(newValue);
-  }
+  set grantType(String newValue) => _grantType = GrantType.fromJson(newValue);
 
   /// json serialization functions
   ///
-  factory AuthToken.fromJson(Map<String, dynamic> json) => _$AuthTokenFromJson(json);
-  Map<String, dynamic> toJson() => _$AuthTokenToJson(this);
+  factory _AuthToken.fromJson(Map<String, dynamic> json) => _$_AuthTokenFromJson(json);
+  Map<String, dynamic> toJson() => _$_AuthTokenToJson(this);
 
   String jsonRepresentation() {
     Map<String, dynamic> json = this.toJson();
@@ -101,28 +99,40 @@ class AuthToken {
 
 enum AuthTokenState { valid, needRefresh, invalid }
 
-class AuthTokenWrapper {
-  AuthToken _authToken;
+///
+/// Authentication Token (wrapper)
+///
+class AuthToken {
+  _AuthToken _authToken;
+
+  _AuthToken get token => _authToken;
 
   bool get isUserToken => _authToken.refreshToken != null;
   String get tenantID => _authToken.jwtToken.tenantID;
   String get clientUID => _authToken.jwtToken.clientUID;
   int get guestID => _authToken.jwtToken.guestID;
+  static String get scopeSeparator => _AuthToken.scopeSeparator;
 
+  //
+  void setGrantType(GrantType newValue) => _authToken.grantType = newValue.rawValue;
+  GrantType grantType() => _authToken._grantType;
+  //
   DateTime get authDate {
     if (_authToken.jwtToken.authTime == null) return null;
     return DateTime.fromMillisecondsSinceEpoch(_authToken.jwtToken.authTime * 1000);
   }
 
   /// json serialization methods.
-  void fromJson(Map<String, dynamic> json) => _authToken = AuthToken.fromJson(json);
+  void fromJson(Map<String, dynamic> json) => _authToken = _AuthToken.fromJson(json);
   Map<String, dynamic> toJson() => _authToken.toJson();
 
+  //
   AuthTokenState get state {
     if (_isSameScope) return AuthTokenState.invalid;
     return _isValid ? AuthTokenState.valid : (hasRefreshToken ? AuthTokenState.needRefresh : AuthTokenState.invalid);
   }
 
+  //
   get hasRefreshToken => _authToken.refreshToken != null;
 
   /// check whether there is the same scope between auth token and its grant type
@@ -130,9 +140,9 @@ class AuthTokenWrapper {
     if (_authToken == null) return false;
     if (_authToken.scope == null) return false;
 
-    List<String> authTokenPart = _authToken.grantType.split(AuthToken.scopeSeparator);
+    List<String> authTokenPart = _authToken.grantType.split(_AuthToken.scopeSeparator);
     authTokenPart = authTokenPart
-        .where((eachPart) => !_authToken.scope.split(AuthToken.scopeSeparator).contains(eachPart))
+        .where((eachPart) => !_authToken.scope.split(_AuthToken.scopeSeparator).contains(eachPart))
         .toList();
 
     return authTokenPart.isEmpty;
@@ -153,6 +163,7 @@ class AuthTokenWrapper {
     return DateTime.now().isAfter(newExpiredDate);
   }
 
+  //
   get _isValid {
     if (!hasRefreshToken &&
         _authToken._grantType == GrantType.ClientCredentials &&
@@ -162,4 +173,7 @@ class AuthTokenWrapper {
       return _isExpired;
     }
   }
+
+  /// get json string
+  String jsonRepresentation() => _authToken.jsonRepresentation();
 }

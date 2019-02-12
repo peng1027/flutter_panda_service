@@ -52,11 +52,12 @@ class Domain extends EnumType<int, String> {
 
 // Endpoint about base Endpoint URL settings
 class Endpoint extends EnumType<int, String> {
-  String apiPath;
+  String _apiPath;
+  set apiPath(String newValue) => _apiPath = newValue;
 
-  Endpoint({int apiType, this.apiPath, String rawValue}) : super(apiType, rawValue);
+  Endpoint({int apiType, String apiPath}) : super(apiType, apiPath);
 
-  String path() => ((apiPath.matchAsPrefix("/") != null) ? apiPath.substring(1) : apiPath);
+  String path() => ((_apiPath.matchAsPrefix("/") != null) ? _apiPath.substring(1) : _apiPath);
 
   String url() => this.baseURL() + "/" + this.path();
 
@@ -71,9 +72,13 @@ class Endpoint extends EnumType<int, String> {
     return (globals.debugModel == true) ? 30 : 2;
   }
 
-  Endpoint pathed(List<dynamic> args) {
-    this.apiPath = sprintf(this.apiPath, args);
+  Endpoint pathedWithArgs(List<dynamic> args) {
+    this._apiPath = sprintf(this._apiPath, args);
     return this;
+  }
+
+  Endpoint pathedWithQueries(Map<String, String> queries) {
+    this._apiPath = MapUtils.generateMapQuery(queries);
   }
 
   String baseURL() {
@@ -103,6 +108,6 @@ class Endpoint extends EnumType<int, String> {
 
   String developmentURL() => "";
 
-  factory Endpoint._requestTokenPath() => Endpoint(rawValue: "connect/token");
-  factory Endpoint._revokeTokenPath() => Endpoint(rawValue: "connect/revocation");
+  factory Endpoint._requestTokenPath() => Endpoint(apiPath: "connect/token");
+  factory Endpoint._revokeTokenPath() => Endpoint(apiPath: "connect/revocation");
 }

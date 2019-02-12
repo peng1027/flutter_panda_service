@@ -19,7 +19,7 @@ class RequestOption {
   final dynamic parameters;
   final HTTPContentType contentType;
   final NetworkBaseOption options;
-  final List<FormDataPart> formDataPart;
+  final List<FormDataPart> formDataParts;
   final NetworkCompletion completion;
 
   RequestOption({
@@ -28,7 +28,7 @@ class RequestOption {
     this.timeOut = 60,
     this.parameters,
     this.headers,
-    this.formDataPart,
+    this.formDataParts,
     this.contentType,
     this.options,
     this.completion,

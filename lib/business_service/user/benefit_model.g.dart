@@ -1,12 +1,3 @@
-/*
- * benefit_model.g.dart
- * flutter_panda_service
- *
- * Developed by zhudelun on 2/8/19 1:49 AM.
- * Copyright (c) 2019 by Farfetch. All rights reserved.
- *
- */
-
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 part of 'benefit_model.dart';
@@ -16,7 +7,17 @@ part of 'benefit_model.dart';
 // **************************************************************************
 
 BenefitModel _$BenefitModelFromJson(Map<String, dynamic> json) {
-  return BenefitModel(id: json['id'] as String, code: json['code'] as String, isActive: json['isActive'] as bool, metadata: json['metadata'] as Map<String, dynamic>);
+  return BenefitModel(
+      id: json['id'] as String,
+      code: json['code'] as String,
+      isActive: json['isActive'] as bool,
+      metadata: json['metadata'] as Map<String, dynamic>);
 }
 
-Map<String, dynamic> _$BenefitModelToJson(BenefitModel instance) => <String, dynamic>{'id': instance.id, 'code': instance.code, 'isActive': instance.isActive, 'metadata': instance.metadata};
+Map<String, dynamic> _$BenefitModelToJson(BenefitModel instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'code': instance.code,
+      'isActive': instance.isActive,
+      'metadata': instance.metadata
+    };

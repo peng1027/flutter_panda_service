@@ -52,6 +52,8 @@ class BoolEncoding extends EnumType<int, String> {
 }
 
 class RestfulRequestBoundaryGenerator {
+  RestfulRequestBoundaryGenerator._();
+
   static String get boundary => sprintf("farfetch.boundary.%08x%08x", [
         Random(DateTime.now().second),
         Random(DateTime.now().millisecondsSinceEpoch),
@@ -59,16 +61,14 @@ class RestfulRequestBoundaryGenerator {
 }
 
 class RestfulQueryHelper {
-  static String query(Map<String, String> param) => _query(param);
+  RestfulQueryHelper._();
 
-  static String _query(Map<String, String> parameters) {
-    List<String> alls = List<String>();
-    parameters.forEach((k, v) => alls.add("$k=$v"));
-    return alls.join("&");
-  }
+  static String query(Map<String, String> param) => MapUtils.generateMapQuery(param);
 }
 
 class RequestEncoder {
+  RequestEncoder._();
+
   static HttpClientRequest encode(HttpClientRequest request, RequestOption option) {
     if (request == null || option == null) {
       AssertionError("invalid HttpClientRequest or RequestOption");
@@ -138,8 +138,8 @@ class RequestEncoder {
       // EMPTY
     }
 
-    if (option.formDataPart != null) {
-      option.formDataPart.forEach((formData) {
+    if (option.formDataParts != null) {
+      option.formDataParts.forEach((formData) {
         bodyData.addAll(formData.formData(boundary));
       });
     }

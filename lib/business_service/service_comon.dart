@@ -7,7 +7,9 @@
  *
  */
 
+import 'package:flutter_panda_foundation/flutter_panda_foundation.dart';
+
 import '../restful_service/response.dart';
 
-typedef ServiceCompletion(Response response, Error error);
-typedef ServiceEntityCompletion<T>(T data, Response response, Error error);
+typedef ServiceCompletion(Response response, ErrorType error);
+typedef ServiceEntityCompletion<T>(T data, Response response, ErrorType error);

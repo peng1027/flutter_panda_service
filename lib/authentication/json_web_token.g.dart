@@ -1,12 +1,3 @@
-/*
- * json_web_token.g.dart
- * flutter_panda_service
- *
- * Developed by zhudelun on 2/8/19 1:49 AM.
- * Copyright (c) 2019 by Farfetch. All rights reserved.
- *
- */
-
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 part of 'json_web_token.dart';
@@ -17,7 +8,9 @@ part of 'json_web_token.dart';
 
 ClaimsSet _$ClaimsSetFromJson(Map<String, dynamic> json) {
   return ClaimsSet(
-      scope: json['scope'] == null ? null : ClaimsSet._scopeFromJson(json['scope']),
+      scope: json['scope'] == null
+          ? null
+          : ClaimsSet._scopeFromJson(json['scope']),
       expireTime: json['exp'] as int,
       notBefore: json['nbf'] as int,
       authTime: json['auth_time'] as int,

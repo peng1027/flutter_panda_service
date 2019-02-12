@@ -13,6 +13,8 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
+  json_annotation: ^2.0.0
+
   sprintf: ^4.0.0   # sprintf function
   built_value: '>=5.5.5 <7.0.0'
 

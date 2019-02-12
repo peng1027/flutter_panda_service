@@ -13,6 +13,17 @@ import '../business_service/user/user_model.dart';
 import 'identifiable_protocol.dart';
 
 class KeyValueStoreUser extends KeyValueStore implements Identifiable {
+  KeyValueStoreUser._();
+  factory KeyValueStoreUser() => _getInstance();
+  static KeyValueStoreUser _instance;
+  static KeyValueStoreUser instance = _getInstance();
+  static KeyValueStoreUser _getInstance() {
+    if (_instance == null) {
+      _instance = KeyValueStoreUser._();
+    }
+    return _instance;
+  }
+
   static String get _keyGuestID => "FFKGuestUserId";
   static String get _keyUserInfo => "IdentifiableUserInfo";
 

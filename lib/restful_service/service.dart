@@ -10,8 +10,8 @@
 import 'dart:core';
 
 import 'package:flutter_panda_foundation/flutter_panda_foundation.dart';
+import 'package:flutter_panda_service/business_service/service_comon.dart';
 
-import '../business_service/service_comon.dart';
 import '../preferences/preferences.dart';
 import 'http_network.dart';
 import 'endpoints.dart';
@@ -31,12 +31,6 @@ class HeaderKey extends EnumValue<String> {
 }
 
 class RestfulService {
-  Future get({
-    Endpoint endpoint,
-    Map<String, dynamic> headers = null,
-    RestfulParameter parameters = null,
-  }) async {}
-
   Map<String, String> buildHttpHeaders(Map<String, String> headers) {
     Map<String, String> allHTTPHeaders = headers ?? Map<String, String>();
 
@@ -54,10 +48,11 @@ class RestfulService {
   void request<T>({
     Endpoint endpoint,
     HTTPMethod method,
+    int timeOut,
     Map<String, String> headers,
-    dynamic parameters,
-    dynamic body,
-    FormDataPart dataParts,
+    dynamic parameters, // url external query
+    dynamic body, // http body
+    List<FormDataPart> dataParts,
     HTTPContentType contentType,
     ServiceEntityCompletion<T> completion,
   }) {

@@ -7,20 +7,24 @@
  *
  */
 
-import 'package:flutter_panda_service/authentication/authentication.dart';
 import 'package:json_annotation/json_annotation.dart';
+import '../authentication.dart';
+
+part 'auth_request_body.g.dart';
 
 @JsonSerializable(nullable: true)
 class AuthRequestBody {
   String get client_id => Authentication.instance.authCredentials.apiClientID;
   String get client_secret => Authentication.instance.authCredentials.apiClientSecret;
 
-  final String grant_type;
+  @JsonKey(name: "grant_type")
+  final String grantType;
   final String scope;
 
   final String username;
   final String password;
-  final String refresh_token;
+  @JsonKey(name: "refresh_token")
+  final String refreshToken;
 
   /// Request client auth token with guest user id.
   final int guestUserId;
@@ -30,23 +34,30 @@ class AuthRequestBody {
   final String openid;
 
   /// Indicates if need bind Farfetch account with WeChat. If `ff_token` is not empty, it means need binding.
-  final String ff_token;
+  @JsonKey(name: "ff_token")
+  final String ffToken;
 
   /// Revoke auth token with below fields.
   final String token;
-  final String token_type_hint;
+  @JsonKey(name: "token_type_hint")
+  final String tokenTypeHint;
+
+  factory AuthRequestBody.fromJson(Map<String, dynamic> json) => _$AuthRequestBodyFromJson(json);
+  Map<String, dynamic> toJson() => _$AuthRequestBodyToJson(this);
+
+  Map<String, dynamic> get dictionaryRepresentation => toJson();
 
   const AuthRequestBody({
-    this.grant_type,
+    this.grantType,
     this.scope,
     this.username,
     this.password,
-    this.refresh_token,
+    this.refreshToken,
     this.guestUserId,
     this.assertion,
     this.openid,
-    this.ff_token,
+    this.ffToken,
     this.token,
-    this.token_type_hint,
+    this.tokenTypeHint,
   });
 }
