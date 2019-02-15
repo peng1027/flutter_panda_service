@@ -1,5 +1,5 @@
 /*
- * form_data_part.dart
+ * http_form_data_part.dart
  * flutter_panda_service
  *
  * Developed by zhudelun on 2/8/19 1:49 AM.
@@ -11,25 +11,25 @@ import 'dart:convert';
 
 import 'package:flutter_panda_foundation/flutter_panda_foundation.dart';
 
-class FormDataPartType extends EnumType<int, String> {
-  static const int data = 0;
-  static const int png = data + 1;
-  static const int jpg = png + 1;
+class HttpFormDataPartType extends EnumType<int, String> {
+  static const int DATA = 0;
+  static const int PNG = DATA + 1;
+  static const int JPG = PNG + 1;
 
-  const FormDataPartType(int type, String rawValue) : super(type, rawValue);
+  const HttpFormDataPartType(int type, String rawValue) : super(type, rawValue);
 
-  static const FormDataPartType Data = const FormDataPartType(FormDataPartType.data, "application/octet-stream");
-  static const FormDataPartType Png = const FormDataPartType(FormDataPartType.png, "image/png");
-  static const FormDataPartType Jpg = const FormDataPartType(FormDataPartType.jpg, "image/jpeg");
+  static HttpFormDataPartType get data => const HttpFormDataPartType(HttpFormDataPartType.DATA, "application/octet-stream");
+  static HttpFormDataPartType get png => const HttpFormDataPartType(HttpFormDataPartType.PNG, "image/png");
+  static HttpFormDataPartType get jpg => const HttpFormDataPartType(HttpFormDataPartType.JPG, "image/jpeg");
 }
 
-class FormDataPart {
+class HttpFormDataPart {
   final List<int> data;
   final String name;
   final String fileName;
-  final FormDataPartType mineType;
+  final HttpFormDataPartType mineType;
 
-  FormDataPart({this.data, this.name, this.fileName, this.mineType});
+  HttpFormDataPart({this.data, this.name, this.fileName, this.mineType});
 
   List<int> formData(String boundary) {
     String body = "";

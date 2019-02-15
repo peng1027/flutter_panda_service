@@ -12,6 +12,7 @@ import 'package:flutter/foundation.dart';
 
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../restful_service/serializable_model.dart';
 import 'benefit_model.dart';
 
 part 'user_model.g.dart';
@@ -27,7 +28,7 @@ class Gender {
 }
 
 @JsonSerializable(nullable: false)
-class UserModel {
+class UserModel implements SerializableModelProtocol {
   final int id;
   final String username;
   final String passsword;

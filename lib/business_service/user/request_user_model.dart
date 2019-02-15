@@ -7,12 +7,13 @@
  *
  */
 
+import 'package:flutter_panda_service/restful_service/serializable_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'request_user_model.g.dart';
 
 @JsonSerializable(nullable: false)
-class RequestUserModel {
+class RequestUserModel implements SerializableModelProtocol {
   final String username;
   final String password;
   final String name;
@@ -27,7 +28,7 @@ class RequestUserModel {
 }
 
 @JsonSerializable(nullable: false)
-class RequestGuestModel {
+class RequestGuestModel implements SerializableModelProtocol {
   final String countryCode;
   final String ip;
   final String externalId;
@@ -40,7 +41,7 @@ class RequestGuestModel {
 }
 
 @JsonSerializable(nullable: false)
-class ChangePasswordModel {
+class ChangePasswordModel implements SerializableModelProtocol {
   final String username;
   final String oldPassword;
   final String newPassword;

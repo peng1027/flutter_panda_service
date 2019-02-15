@@ -11,7 +11,7 @@ import 'benefit_model.dart';
 import 'request_user_model.dart';
 import 'user_model.dart';
 
-import '../service_comon.dart';
+import 'package:flutter_panda_service/restful_service/service_result.dart';
 import '../../restful_service/service_provider.dart';
 
 // UserService the API service about user data

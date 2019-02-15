@@ -7,15 +7,20 @@
  *
  */
 
+import 'dart:convert';
 import 'dart:core';
 
 import 'package:flutter_panda_foundation/flutter_panda_foundation.dart';
-import 'package:flutter_panda_service/business_service/service_comon.dart';
+import 'package:flutter_panda_service/restful_service/http_result.dart';
+import 'package:flutter_panda_service/restful_service/serializable_model.dart';
+import 'package:flutter_panda_service/restful_service/service_manager.dart';
+import 'package:flutter_panda_service/restful_service/service_result.dart';
 
+import '../authentication/authentication_ext.dart';
 import '../preferences/preferences.dart';
 import 'http_network.dart';
 import 'endpoints.dart';
-import 'form_data_part.dart';
+import 'http_form_data_part.dart';
 
 abstract class RestfulParameter {}
 
@@ -45,17 +50,55 @@ class RestfulService {
 
   static Preferences get _prefs => Preferences.instance;
 
-  void request<T>({
+  Future<ServiceEntityResultProtocol> request({
     Endpoint endpoint,
-    HTTPMethod method,
+    HttpMethod method,
     int timeOut,
     Map<String, String> headers,
     dynamic parameters, // url external query
     dynamic body, // http body
-    List<FormDataPart> dataParts,
+    List<HttpFormDataPart> dataParts,
     HTTPContentType contentType,
-    ServiceEntityCompletion<T> completion,
-  }) {
+  }) async {
     var allHttpHeaders = this.buildHttpHeaders(headers);
+
+    // TODO: 这里需要通过http_task来发起http的网络请求
+    AuthenticationExt.instance.futureForRequestTokenIfNeeded(endpoint.needAuth()).then((authToken) {
+      allHttpHeaders[HeaderKey.authorization.rawValue] = "Bearer ${authToken.accessToken}";
+      if (dataParts != null) {
+        HTTPNetwork.upload(
+          endpoint.url(),
+          method: method,
+          headers: allHttpHeaders,
+          parameters: parameters,
+          formDataParts: dataParts,
+        ).then((serviceEntityData) {
+          // TODO: coding here for further data decoding.
+        });
+      } else {}
+    }).catchError((error) {});
+  }
+
+  // private helper
+
+  static ServiceEntityResultModel _handleResult(HttpResult result) {
+    switch (result.rawValue) {
+      case HttpResult.SUCCESS:
+        List<int> data = result.response.data;
+
+        if (data == null || data.isEmpty) {
+          return ServiceEntityResultModel(data: Map<String, dynamic>(), response: result.response);
+        }
+
+        String jsonStr = Utf8Codec().decode(result.response.data);
+        dynamic jsonData = JsonCodec().decode(jsonStr);
+        return ServiceEntityResultModel(data: jsonData, response: result.response);
+
+      case HttpResult.FAILURE:
+        return ServiceEntityResultModel(response: result.response, error: result.error);
+
+      default:
+        return null;
+    }
   }
 }

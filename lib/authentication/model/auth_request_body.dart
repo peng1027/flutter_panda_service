@@ -14,8 +14,8 @@ part 'auth_request_body.g.dart';
 
 @JsonSerializable(nullable: true)
 class AuthRequestBody {
-  String get client_id => Authentication.instance.authCredentials.apiClientID;
-  String get client_secret => Authentication.instance.authCredentials.apiClientSecret;
+  String get client_id => Authentication.instance.AuthCredentials.apiClientID;
+  String get client_secret => Authentication.instance.AuthCredentials.apiClientSecret;
 
   @JsonKey(name: "grant_type")
   final String grantType;

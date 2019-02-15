@@ -9,12 +9,13 @@
 
 import 'dart:core';
 
+import 'package:flutter_panda_service/restful_service/serializable_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'error_model.g.dart';
 
 @JsonSerializable(nullable: true)
-class ErrorModel {
+class ErrorModel implements SerializableModelProtocol {
   @JsonKey(name: 'Code')
   final int code;
   @JsonKey(name: 'Message', nullable: true)
@@ -29,7 +30,7 @@ class ErrorModel {
 }
 
 @JsonSerializable(nullable: true)
-class ErrorResponseBody {
+class ErrorResponseBody implements SerializableModelProtocol {
   @JsonKey(name: 'Errors')
   final List<ErrorModel> errors;
 

@@ -1,59 +1,59 @@
-import 'package:flutter_panda_service/business_service/service_comon.dart';
-import 'package:flutter_panda_service/restful_service/form_data_part.dart';
+import 'http_form_data_part.dart';
 import 'package:meta/meta.dart';
 
 import 'http_network.dart';
 import 'endpoints.dart';
 import 'service.dart';
+import 'service_result.dart';
 
 class RestfulServiceManager {
   static RestfulService _service = RestfulService();
-  static RestfulService get service => _service;
 
-  static void get<T>({
+  static Future<ServiceEntityResultProtocol> get({
     @required Endpoint endpoint,
     Map<String, String> headers,
     dynamic parameters,
-    @required ServiceEntityCompletion<T> completion,
-  }) {
-    RestfulServiceManager.service.request<T>(
+  }) async {
+    ServiceEntityResultProtocol result = await RestfulServiceManager._service.request(
       endpoint: endpoint,
-      method: HTTPMethod.get,
+      method: HttpMethod.get,
       headers: headers,
       parameters: parameters,
-      completion: completion,
     );
+    return result;
   }
 
-  static void post<T>({
+  static Future<ServiceEntityResultProtocol> post({
     @required Endpoint endpoint,
     Map<String, String> headers,
     dynamic body,
     HTTPContentType contentType,
-    @required ServiceEntityCompletion<T> completion,
-  }) {
-    RestfulServiceManager.service.request<T>(
+  }) async {
+    ServiceEntityResultProtocol result = await RestfulServiceManager._service.request(
       endpoint: endpoint,
-      method: HTTPMethod.post,
+      method: HttpMethod.post,
       headers: headers,
       contentType: contentType,
       body: body,
-      completion: completion,
     );
+    return result;
   }
 
-  static void upload<T>(
-      {Endpoint endpoint,
-      Map<String, String> headers,
-      List<FormDataPart> formDataParts,
-      dynamic parameters,
-      @required ServiceEntityCompletion<T> completion}) {
-    RestfulServiceManager.service.request<T>(
-        endpoint: endpoint,
-        method: HTTPMethod.post,
-        headers: headers,
-        parameters: parameters,
-        dataParts: formDataParts,
-        completion: completion);
+  // TODO: other HTTP request type should be written at here. for example, PUT, DELETE etc.
+
+  static Future<ServiceEntityResultProtocol> upload({
+    Endpoint endpoint,
+    Map<String, String> headers,
+    List<HttpFormDataPart> formDataParts,
+    dynamic parameters,
+  }) async {
+    ServiceEntityResultProtocol result = await RestfulServiceManager._service.request(
+      endpoint: endpoint,
+      method: HttpMethod.post,
+      headers: headers,
+      parameters: parameters,
+      dataParts: formDataParts,
+    );
+    return result;
   }
 }

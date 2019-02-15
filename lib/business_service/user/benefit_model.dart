@@ -11,10 +11,12 @@ import 'package:flutter/foundation.dart';
 
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../restful_service/serializable_model.dart';
+
 part 'benefit_model.g.dart';
 
 @JsonSerializable(nullable: false)
-class BenefitModel {
+class BenefitModel implements SerializableModelProtocol {
   final String id;
   final String code;
   final bool isActive;

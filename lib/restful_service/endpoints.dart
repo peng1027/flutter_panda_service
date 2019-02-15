@@ -37,17 +37,17 @@ class ApiType extends EnumType<int, String> {
 }
 
 class Domain extends EnumType<int, String> {
-  static const int global = 0;
-  static const int payment = global + 1;
-  static const int authentication = payment + 1;
-  static const int china = authentication + 1;
+  static const int GLOBAL = 0;
+  static const int PAYMENT = GLOBAL + 1;
+  static const int AUTHENTICATION = PAYMENT + 1;
+  static const int CHINA = AUTHENTICATION + 1;
 
   const Domain(int type, String rawValue) : super(type, rawValue);
 
-  static const Domain Global = const Domain(Domain.global, "https://api.farfetch.net");
-  static const Domain Payment = const Domain(Domain.payment, "https://paymentsapi.farfetch.net");
-  static const Domain Authentication = const Domain(Domain.authentication, "https://api.farfetch.net/ext/auth");
-  static const Domain China = const Domain(Domain.china, "https://channel-service-panda.farfetch.net");
+  static const Domain global = const Domain(GLOBAL, "https://api.farfetch.net");
+  static const Domain payment = const Domain(PAYMENT, "https://paymentsapi.farfetch.net");
+  static const Domain authentication = const Domain(AUTHENTICATION, "https://api.farfetch.net/ext/auth");
+  static const Domain china = const Domain(CHINA, "https://channel-service-panda.farfetch.net");
 }
 
 // Endpoint about base Endpoint URL settings
@@ -61,9 +61,9 @@ class Endpoint extends EnumType<int, String> {
 
   String url() => this.baseURL() + "/" + this.path();
 
-  bool needAuth() => (this.typeValue != ApiType.almirCMS &&
-      this.path() != Endpoint._requestTokenPath().rawValue &&
-      this.path() != Endpoint._revokeTokenPath().rawValue);
+  String baseURL() => globals.debugModel ? (developmentURL() ?? productURL()) : productURL();
+
+  bool needAuth() => (this.typeValue != ApiType.almirCMS && this.path() != Endpoint._requestTokenPath().rawValue && this.path() != Endpoint._revokeTokenPath().rawValue);
 
   int timeoutInternal() {
     if (this.typeValue == ApiType.abTesting) {
@@ -79,29 +79,26 @@ class Endpoint extends EnumType<int, String> {
 
   Endpoint pathedWithQueries(Map<String, String> queries) {
     this._apiPath = MapUtils.generateMapQuery(queries);
-  }
-
-  String baseURL() {
-    return globals.debugModel ? (developmentURL() ?? productURL()) : productURL();
+    return this;
   }
 
   String productURL() {
     switch (this.typeValue) {
       case ApiType.eCommerce:
-        return Domain.Global.rawValue;
+        return Domain.global.rawValue;
 
       case ApiType.authentication:
-        return Domain.Authentication.rawValue;
+        return Domain.authentication.rawValue;
 
       case ApiType.payment:
-        return Domain.Payment.rawValue;
+        return Domain.payment.rawValue;
 
       case ApiType.content:
       case ApiType.almirCMS:
       case ApiType.marketing:
       case ApiType.abTesting:
       case ApiType.channelService:
-        return Domain.China.rawValue;
+        return Domain.china.rawValue;
     }
     return "";
   }

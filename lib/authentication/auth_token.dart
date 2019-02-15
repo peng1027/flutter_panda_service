@@ -112,6 +112,7 @@ class AuthToken {
   String get clientUID => _authToken.jwtToken.clientUID;
   int get guestID => _authToken.jwtToken.guestID;
   static String get scopeSeparator => _AuthToken.scopeSeparator;
+  String get accessToken => _authToken.accessToken;
 
   //
   void setGrantType(GrantType newValue) => _authToken.grantType = newValue.rawValue;
@@ -141,9 +142,7 @@ class AuthToken {
     if (_authToken.scope == null) return false;
 
     List<String> authTokenPart = _authToken.grantType.split(_AuthToken.scopeSeparator);
-    authTokenPart = authTokenPart
-        .where((eachPart) => !_authToken.scope.split(_AuthToken.scopeSeparator).contains(eachPart))
-        .toList();
+    authTokenPart = authTokenPart.where((eachPart) => !_authToken.scope.split(_AuthToken.scopeSeparator).contains(eachPart)).toList();
 
     return authTokenPart.isEmpty;
   }
@@ -165,9 +164,7 @@ class AuthToken {
 
   //
   get _isValid {
-    if (!hasRefreshToken &&
-        _authToken._grantType == GrantType.ClientCredentials &&
-        Authentication.instance.keyValueStore.guestID != null) {
+    if (!hasRefreshToken && _authToken._grantType == GrantType.ClientCredentials && Authentication.instance.keyValueStore.guestID != null) {
       return Authentication.instance.keyValueStore.guestID == this.guestID ? _isExpired : false;
     } else {
       return _isExpired;

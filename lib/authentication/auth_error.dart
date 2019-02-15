@@ -7,10 +7,10 @@
  *
  */
 
-import 'package:flutter_panda_foundation/common/enum_type.dart';
 import 'package:flutter_panda_foundation/flutter_panda_foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import '../restful_service/serializable_model.dart';
 part 'auth_error.g.dart';
 
 class AuthErrorCode {
@@ -31,7 +31,7 @@ class AuthErrorDescription {
 }
 
 @JsonSerializable(nullable: false)
-class AuthErrorResponse extends Error {
+class AuthErrorResponse extends Error implements SerializableModelProtocol {
   final String error;
 
   @JsonKey(name: "error_description")

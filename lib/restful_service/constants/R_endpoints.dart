@@ -15,10 +15,8 @@ class EndpointCollection {
   static Endpoint get tokenRevoke => Endpoint(apiType: ApiType.authentication, apiPath: "connect/revocation");
 
   // mobile
-  static Endpoint get mobileSecurityCode =>
-      Endpoint(apiType: ApiType.channelService, apiPath: "api/v1/identities/mobile/security-code");
-  static Endpoint get mobileVerification =>
-      Endpoint(apiType: ApiType.channelService, apiPath: "api/v1/identities/mobile/security-code/verification");
+  static Endpoint get mobileSecurityCode => Endpoint(apiType: ApiType.channelService, apiPath: "api/v1/identities/mobile/security-code");
+  static Endpoint get mobileVerification => Endpoint(apiType: ApiType.channelService, apiPath: "api/v1/identities/mobile/security-code/verification");
 
   // user
   static Endpoint get guestCreate => Endpoint(apiType: ApiType.eCommerce, apiPath: "v1/guestUsers");
@@ -29,26 +27,19 @@ class EndpointCollection {
   static Endpoint get userFetchByID => Endpoint(apiType: ApiType.eCommerce, apiPath: "v1/users/%d");
   static Endpoint get userFetchMe => Endpoint(apiType: ApiType.eCommerce, apiPath: "v1/users/me");
   static Endpoint get userBenefitsFetch => Endpoint(apiType: ApiType.eCommerce, apiPath: "v1/users/%d/benefits");
-  static Endpoint get userPersonalShopperFetchByID =>
-      Endpoint(apiType: ApiType.eCommerce, apiPath: "v1/personalShoppers/%d");
-  static Endpoint get userPasswordChange =>
-      Endpoint(apiType: ApiType.eCommerce, apiPath: "v1/users/%d/password-change");
+  static Endpoint get userPersonalShopperFetchByID => Endpoint(apiType: ApiType.eCommerce, apiPath: "v1/personalShoppers/%d");
+  static Endpoint get userPasswordChange => Endpoint(apiType: ApiType.eCommerce, apiPath: "v1/users/%d/password-change");
 
   // CountryProperty
-  static Endpoint get countryProperties =>
-      Endpoint(apiType: ApiType.channelService, apiPath: "api/v1/contents/country-properties");
+  static Endpoint get countryProperties => Endpoint(apiType: ApiType.channelService, apiPath: "api/v1/contents/country-properties");
 
-  static Endpoint get bwContent =>
-      Endpoint(apiType: ApiType.channelService, apiPath: "api/v0/content/v1/search/contents");
+  static Endpoint get bwContent => Endpoint(apiType: ApiType.channelService, apiPath: "api/v0/content/v1/search/contents");
 
   // Marketing
-  static Endpoint get aignactivate =>
-      Endpoint(apiType: ApiType.marketing, apiPath: "api/v0/marketing/v1/campaigns/%@/activations");
-  static Endpoint get subscriptionPackages =>
-      Endpoint(apiType: ApiType.marketing, apiPath: "api/v0/marketing/v1/subscriptionPackages");
+  static Endpoint get signActivate => Endpoint(apiType: ApiType.marketing, apiPath: "api/v0/marketing/v1/campaigns/%@/activations");
+  static Endpoint get subscriptionPackages => Endpoint(apiType: ApiType.marketing, apiPath: "api/v0/marketing/v1/subscriptionPackages");
   static Endpoint get subscribe => Endpoint(apiType: ApiType.marketing, apiPath: "api/v0/marketing/v1/subscriptions");
-  static Endpoint get trackWechatShare =>
-      Endpoint(apiType: ApiType.marketing, apiPath: "api/v1/marketing/trackings/wechat-sharing");
+  static Endpoint get trackWeChatShare => Endpoint(apiType: ApiType.marketing, apiPath: "api/v1/marketing/trackings/wechat-sharing");
   static Endpoint get track => Endpoint(apiType: ApiType.marketing, apiPath: "api/v0/marketing/v1/trackings");
 
   // Tenant

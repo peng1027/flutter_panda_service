@@ -1,5 +1,5 @@
 /*
- * error.dart
+ * http_error.dart
  * flutter_panda_service
  *
  * Developed by zhudelun on 2/8/19 1:49 AM.
@@ -8,7 +8,7 @@
  */
 
 import 'package:flutter_panda_foundation/flutter_panda_foundation.dart';
-import 'response.dart';
+import 'http_response.dart';
 
 enum EncodingFailedReasonType { missingURL, jsonEncodingFailed }
 
@@ -30,7 +30,7 @@ class EncodingFailedReason extends EnumType<EncodingFailedReasonType, Error> {
   }
 }
 
-class RestfulError extends EnumType<int, String> implements ErrorType {
+class HttpError extends EnumType<int, String> implements ErrorType {
   static const int UNKNOWN = -1;
   static const int TIMEOUT = 0;
   static const int NOT_CONNECTED_TO_INTERNET = TIMEOUT + 1;
@@ -41,35 +41,35 @@ class RestfulError extends EnumType<int, String> implements ErrorType {
 
   final String url;
   final EncodingFailedReason reason;
-  final Response response;
+  final HttpResponse response;
 
   final int errorType;
 
-  const RestfulError(int type, {String rawValue, this.url, this.reason, this.response, this.errorType}) : super(type, rawValue);
+  const HttpError(int type, {String rawValue, this.url, this.reason, this.response, this.errorType}) : super(type, rawValue);
 
-  factory RestfulError.unknown(Error error) => RestfulError(UNKNOWN, rawValue: "Unknown error.");
-  factory RestfulError.timeout() => RestfulError(TIMEOUT);
-  factory RestfulError.notConnectedToInternet() => RestfulError(NOT_CONNECTED_TO_INTERNET);
-  factory RestfulError.invalidURL(String url) => RestfulError(INVALID_URL, url: url);
-  factory RestfulError.encodingFailed(EncodingFailedReason reason) => RestfulError(ENCODING_FAILED, reason: reason);
-  factory RestfulError.responseValidationFailed(Response response) => RestfulError(RESPONSE_VALIDATION_FAILED, response: response);
-  factory RestfulError.systemError(Error error) => RestfulError(SYSTEM_ERROR, rawValue: Error.safeToString(error));
+  factory HttpError.unknown(Error error) => HttpError(UNKNOWN, rawValue: "Unknown error.");
+  factory HttpError.timeout() => HttpError(TIMEOUT);
+  factory HttpError.notConnectedToInternet() => HttpError(NOT_CONNECTED_TO_INTERNET);
+  factory HttpError.invalidURL(String url) => HttpError(INVALID_URL, url: url);
+  factory HttpError.encodingFailed(EncodingFailedReason reason) => HttpError(ENCODING_FAILED, reason: reason);
+  factory HttpError.responseValidationFailed(HttpResponse response) => HttpError(RESPONSE_VALIDATION_FAILED, response: response);
+  factory HttpError.systemError(Error error) => HttpError(SYSTEM_ERROR, rawValue: Error.safeToString(error));
 
   String errorDescription() {
     switch (this.errorType) {
-      case RestfulError.UNKNOWN:
+      case HttpError.UNKNOWN:
         return this.rawValue ?? "unknown error";
-      case RestfulError.TIMEOUT:
+      case HttpError.TIMEOUT:
         return "Timeout";
-      case RestfulError.NOT_CONNECTED_TO_INTERNET:
+      case HttpError.NOT_CONNECTED_TO_INTERNET:
         return "Cannot connect to internet";
-      case RestfulError.INVALID_URL:
+      case HttpError.INVALID_URL:
         return "URL is not valid: ${this.url}";
-      case RestfulError.ENCODING_FAILED:
+      case HttpError.ENCODING_FAILED:
         return "${this.reason.localizedDescription()}";
-      case RestfulError.RESPONSE_VALIDATION_FAILED:
+      case HttpError.RESPONSE_VALIDATION_FAILED:
         return "Response status code was unacceptable: ${this.response.originalResponse.statusCode}";
-      case RestfulError.SYSTEM_ERROR:
+      case HttpError.SYSTEM_ERROR:
         return this.rawValue ?? "System error";
       default:
         return this.rawValue ?? "** error: unknown error";

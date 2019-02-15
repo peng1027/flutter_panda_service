@@ -1,5 +1,5 @@
 /*
- * request_encoder.dart
+ * http_request_encoder.dart
  * flutter_panda_service
  *
  * Developed by zhudelun on 2/8/19 1:49 AM.
@@ -15,7 +15,7 @@ import 'package:flutter_panda_foundation/flutter_panda_foundation.dart';
 import 'package:flutter_panda_service/restful_service/http_network.dart';
 import 'package:sprintf/sprintf.dart';
 
-import 'request_option.dart';
+import 'http_request_option.dart';
 
 class ArrayEncoding extends EnumType<int, String> {
   static const int brackets = 0;
@@ -69,7 +69,7 @@ class RestfulQueryHelper {
 class RequestEncoder {
   RequestEncoder._();
 
-  static HttpClientRequest encode(HttpClientRequest request, RequestOption option) {
+  static HttpClientRequest encode(HttpClientRequest request, HttpRequestOption option) {
     if (request == null || option == null) {
       AssertionError("invalid HttpClientRequest or RequestOption");
       return request;
@@ -89,10 +89,10 @@ class RequestEncoder {
     }
   }
 
-  static HttpClientRequest urlEncode(HttpClientRequest request, RequestOption option) {
+  static HttpClientRequest urlEncode(HttpClientRequest request, HttpRequestOption option) {
     request.headers.contentType = option.contentType.toContentType();
 
-    if (!(option.method == HTTPMethod.get || option.method == HTTPMethod.head || option.method == HTTPMethod.delete)) {
+    if (!(option.method == HttpMethod.get || option.method == HttpMethod.head || option.method == HttpMethod.delete)) {
       final String query = RestfulQueryHelper.query(option.parameters);
       List<int> data = utf8.encode(query);
       request.write(data);
@@ -101,7 +101,7 @@ class RequestEncoder {
     return request;
   }
 
-  static HttpClientRequest jsonEncode(HttpClientRequest request, RequestOption option) {
+  static HttpClientRequest jsonEncode(HttpClientRequest request, HttpRequestOption option) {
     request.headers.contentType = option.contentType.toContentType();
 
     if (option.parameters is List<int>) {
@@ -115,7 +115,7 @@ class RequestEncoder {
     return request;
   }
 
-  static HttpClientRequest multiPartFormEncode(HttpClientRequest request, RequestOption option) {
+  static HttpClientRequest multiPartFormEncode(HttpClientRequest request, HttpRequestOption option) {
     request.headers.contentType = option.contentType.toContentType();
 
     final String boundary = RestfulRequestBoundaryGenerator.boundary;
@@ -148,7 +148,7 @@ class RequestEncoder {
     List<int> endData = Utf8Codec().encode(endStr);
     bodyData.addAll(endData);
 
-    // assign htth body
+    // assign http body
     request.write(bodyData);
 
     return request;
