@@ -5,7 +5,7 @@ author:
 homepage:
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.0.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -21,15 +21,15 @@ dependencies:
   # farfetch packages
 
   flutter_panda_foundation:
-    path: ../flutter_panda_foundation/
-#    git:
-#      url: https://github.com/derrick-zhu/flutter_panda_foundation.git
+#    path: ../flutter_panda_foundation/
+    git:
+      url: https://github.com/peng1027/flutter_panda_foundation.git
 #      ref: develop
 
   flutter_panda_platform:
-    path: ../flutter_panda_platform/
-#    git:
-#      url: https://github.com/derrick-zhu/flutter_panda_platform.git
+#    path: ../flutter_panda_platform/
+    git:
+      url: https://github.com/peng1027/flutter_panda_platform.git
 #      ref: develop
 
 dev_dependencies:
